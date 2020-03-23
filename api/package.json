@@ -1,0 +1,31 @@
+{
+  "name": "passive-investor",
+  "version": "1.0.0",
+  "description": "Node.JS back end for the passive-investor app.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laitilari/passive-investor.git"
+  },
+  "keywords": [
+    "passive",
+    "investing",
+    "etf"
+  ],
+  "author": "Ilari \"Ilarion\" Laitinen",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/laitilari/passive-investor/issues"
+  },
+  "homepage": "https://github.com/laitilari/passive-investor#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.19.1"
+  }
+}
