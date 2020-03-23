@@ -4,6 +4,7 @@
   "description": "Node.JS back end for the passive-investor app.",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +27,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "prettier": "^1.19.1"
+    "eslint": "^6.8.0",
+    "prettier": "^2.0.1"
   }
 }
