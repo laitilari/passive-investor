@@ -5,14 +5,13 @@ const {
   createUser,
   updateUser,
   deleteUser,
-  checkId,
-  checkBody,
+  topUsers,
 } = require('../controllers/userController')
 const router = express.Router()
 
-router.param('id', checkId)
+// router.param('id', checkId)
 
-router.route('/').get(getAllUsers).post(checkBody, createUser)
-router.route('/:id').get(checkId, getUser).patch(updateUser).delete(deleteUser)
-
+router.route('/').get(getAllUsers).post(createUser)
+router.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
+router.route('/top-users').get(topUsers)
 module.exports = router
