@@ -1,6 +1,7 @@
-const Test = require('../models/testModel')
+const User = require('../models/userModel')
 const APIFeatures = require('../utils/apiFeatures')
 const catchAsync = require('./../utils/catchAsync')
+const AppError = require('./../utils/appError')
 
 exports.topUsers = (req, res, next) => {
   req.query.limit = '2'
@@ -10,37 +11,40 @@ exports.topUsers = (req, res, next) => {
 }
 
 exports.getAllUsers = catchAsync(async (req, res) => {
-  const features = new APIFeatures(Test.find(), req.query)
+  const features = new APIFeatures(User.find(), req.query)
     .filter()
     .sort()
     .limit()
     .paginate()
 
-  const tests = await features.query
+  const users = await features.query
 
   res.status(200).json({
     status: 'success',
     requestedAt: req.requestTime,
-    results: tests.length,
+    results: users.length,
     data: {
-      tests,
+      users,
     },
   })
 })
 
-exports.getUser = catchAsync(async (req, res) => {
-  const test = await Test.findById(req.params.id)
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id)
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404))
+  }
   res.status(200).json({
     status: 'success',
     requestedAt: req.requestTime,
     data: {
-      test,
+      user,
     },
   })
 })
 
 exports.createUser = catchAsync(async (req, res, next) => {
-  const user = await Test.create(req.body)
+  const user = await User.create(req.body)
   res.status(200).json({
     status: 'success',
     requestedAt: req.requestTime,
@@ -51,7 +55,7 @@ exports.createUser = catchAsync(async (req, res, next) => {
 })
 
 exports.updateUser = catchAsync(async (req, res) => {
-  const test = await Test.findByIdAndUpdate(req.params.id, req.body, {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   })
@@ -59,13 +63,13 @@ exports.updateUser = catchAsync(async (req, res) => {
     status: 'success',
     requestedAt: req.requestTime,
     data: {
-      test,
+      user,
     },
   })
 })
 
 exports.deleteUser = catchAsync(async (req, res) => {
-  await Test.findByIdAndDelete(req.params.id)
+  await User.findByIdAndDelete(req.params.id)
   res.status(204).json({
     status: 'success',
     requestedAt: req.requestTime,
