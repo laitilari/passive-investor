@@ -9,6 +9,8 @@
   },
   "rules": {
     "no-console": "warn",
-    "camelcase": "warn"
+    "camelcase": "warn",
+    "new-cap": "off",
+    "linebreak-style": "off"
   }
 }
